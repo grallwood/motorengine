@@ -68,6 +68,8 @@ class TestDocument(AsyncTestCase):
         self.drop_coll("Post")
         self.drop_coll("Comment")
         self.drop_coll("CommentNotLazy")
+        self.drop_coll("UniqueFieldDocument")
+        self.drop_coll("UniqueSparseFieldDocument")
 
     def test_has_proper_collection(self):
         assert User.__collection__ == 'User'
