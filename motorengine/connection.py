@@ -85,11 +85,7 @@ def disconnect(alias=DEFAULT_CONNECTION_NAME, framework=FRAMEWORK_TORNADO):
     global _default_dbs
 
     if alias in _connections:
-<<<<<<< HEAD
-        _connections[alias].close()
-=======
         get_connection(alias=alias, framework=framework).disconnect()
->>>>>>> Add asyncio support under motorengine.aiomotorengine
         del _connections[alias]
         del _connection_settings[alias]
         del _default_dbs[alias]
