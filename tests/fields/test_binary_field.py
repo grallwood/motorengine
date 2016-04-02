@@ -20,6 +20,7 @@ class TestBinaryField(AsyncTestCase):
         expect(field.validate(1)).to_be_false()
         expect(field.validate(b'abc')).to_be_true()
         expect(field.validate(six.u('abc'))).to_be_false()
+        expect(field.validate(None)).to_be_true()
 
     def test_validate_enforces_max_bytes(self):
         field = BinaryField(max_bytes=20)
