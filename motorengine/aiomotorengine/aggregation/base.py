@@ -14,7 +14,7 @@ class Aggregation(motorengine.Aggregation):
         try:
             # from motor-0.5 coll.aggregate return AsyncIOMotorAggregateCursor
             lst = yield from coll.aggregate(self.to_query(), cursor=False)
-            for item in lst['result']:
+            for item in lst:
                 self.fill_ids(item)
                 results.append(edict(item))
         except Exception as e:
