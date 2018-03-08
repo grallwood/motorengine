@@ -17,22 +17,17 @@ class TestConnect(AsyncTestCase):
         super(TestConnect, self).setUp(auto_connect=False)
 
     def test_get_motor_client_classes(self):
-        from motor.motor_tornado import MotorClient, MotorReplicaSetClient
-        from motor.motor_asyncio import (
-            AsyncIOMotorClient, AsyncIOMotorReplicaSetClient
-        )
+        from motor.motor_tornado import MotorClient
+        from motor.motor_asyncio import AsyncIOMotorClient
 
-        client, replica_set = get_motor_client_classes()
+        client = get_motor_client_classes()
         expect(client).to_equal(MotorClient)
-        expect(replica_set).to_equal(MotorReplicaSetClient)
 
-        client, replica_set = get_motor_client_classes(framework='tornado')
+        client = get_motor_client_classes(framework='tornado')
         expect(client).to_equal(MotorClient)
-        expect(replica_set).to_equal(MotorReplicaSetClient)
 
-        client, replica_set = get_motor_client_classes(framework='asyncio')
+        client = get_motor_client_classes(framework='asyncio')
         expect(client).to_equal(AsyncIOMotorClient)
-        expect(replica_set).to_equal(AsyncIOMotorReplicaSetClient)
 
     def test_get_database_class(self):
         Database = get_database_class()

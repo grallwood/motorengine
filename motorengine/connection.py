@@ -10,11 +10,6 @@ try:
 except ImportError:
     pass
 
-try:
-    from motor import MotorClient
-except ImportError:
-    pass
-
 from motorengine.database import Database
 
 DEFAULT_CONNECTION_NAME = 'default'
@@ -34,18 +29,16 @@ _default_dbs = {}
 
 def get_motor_client_classes(framework=FRAMEWORK_TORNADO):
     '''
-    Get MotorClient and MotorReplicaSetClient classes for specified framework
+    Get MotorClient classes for specified framework
 
     framework could be 'tornado' (default) or 'asyncio'
     '''
     if (framework == FRAMEWORK_TORNADO):
-        from motor import MotorClient, MotorReplicaSetClient
-        return (MotorClient, MotorReplicaSetClient)
+        from motor import MotorClient
+        return MotorClient
     elif (framework == FRAMEWORK_ASYNCIO):
-        from motor.motor_asyncio import (
-            AsyncIOMotorClient, AsyncIOMotorReplicaSetClient
-        )
-        return (AsyncIOMotorClient, AsyncIOMotorReplicaSetClient)
+        from motor.motor_asyncio import AsyncIOMotorClient
+        return AsyncIOMotorClient
     else:
         raise ValueError('framework could be "tornado" or "asyncio"')
 
@@ -101,7 +94,7 @@ def get_connection(
         conn_settings = _connection_settings[alias].copy()
         db = conn_settings.pop('name', None)
 
-        MotorClient, MotorReplicaSetClient = get_motor_client_classes(framework)
+        MotorClient = get_motor_client_classes(framework)
 
         connection_class = MotorClient
         if 'replicaSet' in conn_settings:
