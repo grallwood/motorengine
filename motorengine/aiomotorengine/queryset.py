@@ -216,7 +216,7 @@ class QuerySet(motorengine.queryset.QuerySet):
             filters = self.get_query_from_filters(filters)
 
         instance = yield from self.coll(alias).find_one(
-            filters, fields=self._loaded_fields.to_query(self.__klass__)
+            filters, projection=self._loaded_fields.to_query(self.__klass__)
         )
         if instance is None:
             return None
