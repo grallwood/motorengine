@@ -21,7 +21,7 @@ class DictField(BaseField):
 
         try:
             json.dumps(value)
-        except Excepetion as e:
+        except TypeError:
             return False
 
         return True
