@@ -13,10 +13,10 @@ class DictField(BaseField):
         return value
 
     def validate(self, value):
-        if type(value) is not dict:
+        if isinstance(value, (dict, list)):
             return False
         for key in value.keys():
-            if type(key) is not str:
+            if not isinstance(key, str):
                 return False
 
         try:
