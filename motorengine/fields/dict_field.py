@@ -13,11 +13,16 @@ class DictField(BaseField):
         return value
 
     def validate(self, value):
-        if isinstance(value, (dict, list)):
-            return False
-        for key in value.keys():
-            if not isinstance(key, str):
-                return False
+        if value is None:
+            return True
+
+        if isinstance(value, dict):
+            for key in value.keys():
+                if not isinstance(key, str):
+                    return False
+            return True
+        if isinstance(value, list):
+            return True
 
         try:
             json.dumps(value)
