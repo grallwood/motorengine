@@ -48,10 +48,10 @@ MotorEngine is a port of the amazing MongoEngine Mapper. Instead of using pymong
     include_package_data=True,
     install_requires=[
         'pymongo==3.6',
-        'tornado',
+        'tornado==5.1.1',
         'motor==1.2.1',
-        'six',
-        'easydict'
+        'six==1.11.0',
+        'easydict==1.7'
     ],
     use_2to3=True,
     extras_require={
